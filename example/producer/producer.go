@@ -20,7 +20,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/confluentinc/confluent-kafka-go/kafka"
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 	"github.com/kyawkyawsoezhu/otelconfluent"
 	"github.com/kyawkyawsoezhu/otelconfluent/example"
 )
