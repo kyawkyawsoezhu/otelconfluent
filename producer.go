@@ -21,7 +21,7 @@ import (
 	"sync"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/etf1/opentelemetry-go-contrib/instrumentation/github.com/confluentinc/confluent-kafka-go/otelconfluent/internal"
+	"github.com/kyawkyawsoezhu/otelconfluent/internal"
 
 	"go.opentelemetry.io/contrib"
 	"go.opentelemetry.io/otel"

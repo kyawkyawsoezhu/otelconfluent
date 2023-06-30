@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package otelconfluent
+// package otelconfluent instruments github.com/confluentinc/confluent-kafka-go.
+//
+// This instrumentation provided is tracing instrumentation for the kafka
+// client.
+//
+// The instrumentation works by wrapping the kafka producer or consumer by calling
+// `NewProducerWithTracing` or `NewConsumerWithTracing` and tracing it's every operation.
 
-import (
-	"go.opentelemetry.io/otel/codes"
-	oteltrace "go.opentelemetry.io/otel/trace"
-)
-
-const (
-	// tracerName is the technical name of the tracer.
-	tracerName = "github.com/etf1/opentelemetry-go-contrib/instrumentation/github.com/confluentinc/confluent-kafka-go/otelconfluent"
-)
-
-func endSpan(s oteltrace.Span, err error) {
-	if err != nil {
-		s.SetStatus(codes.Error, err.Error())
-	}
-	s.End()
-}
+package otelconfluent // import "github.com/kyawkyawsoezhu/otelconfluent"

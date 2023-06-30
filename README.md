@@ -1,17 +1,32 @@
-# OpenTelemetry Go Contributions
+# OpenTelemetry Instrumentation
 
-[![Test](https://github.com/etf1/opentelemetry-go-contrib/actions/workflows/master.yml/badge.svg)](https://github.com/etf1/opentelemetry-go-contrib/actions/workflows/master.yml)
+This package provides an instrumentation of [OpenTelemetry](https://github.com/open-telemetry).
 
-## About
+Here are the available methods instrumented:
 
-This reopsitory hosts instrumentations of the following [OpenTelemetry](https://opentelemetry.io/) libraries:
+## Producer
 
-* [confluentinc/confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go)
+```go
+Produce(msg *kafka.Message, deliveryChan chan kafka.Event) error
+ProduceChannel() chan *kafka.Message
+```
 
+## Consumer
 
-## Instrumentations
+```go
+ReadMessage(timeout time.Duration) (*kafka.Message, error)
+Poll(timeoutMs int) kafka.Event
+```
 
-In case you're looking for other libraries instrumentations, you can also take a look at the following repositories:
+Concerning customers, I've also added these 2 following methods in order to trace the consumer handler duration (which is not possible with the original library available methods):
 
-* [open-telemetry/opentelemetry-go-contrib](https://github.com/open-telemetry/opentelemetry-go-contrib)
-* [uptrace/opentelemetry-go-extra](https://github.com/uptrace/opentelemetry-go-extra)
+```go
+ReadMessageWithHandler(timeout time.Duration, handler ConsumeFunc) (*kafka.Message, error)
+PollWithHandler(timeoutMs int, handler ConsumeFunc) kafka.Event
+```
+
+Handler function takes the following arguments:
+
+```go
+type ConsumeFunc func(consumer *kafka.Consumer, msg *kafka.Message) error
+```
